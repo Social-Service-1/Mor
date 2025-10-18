@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كلية الخدمة الاجتماعية - الجامعة العربية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #283593;
+            --accent-color: #e91e63;
+            --success-color: #00c853;
+            --warning-color: #ffab00;
+            --info-color: #2196f3;
+            --light-color: #f5f7ff;
+            --dark-color: #0d1b2a;
+            --text-color: #2d3748;
+            --border-radius: 16px;
+            --card-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            --gradient-accent: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+            --gradient-success: linear-gradient(135deg, #00c853 0%, #00a152 100%);
+            --gradient-info: linear-gradient(135deg, #2196f3 0%, #0d47a1 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e3e8ff 100%);
+            color: var(--text-color);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles - تحسين الهيدر */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 25px 0;
+            box-shadow: 0 8px 30px rgba(26, 35, 126, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 1;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 90px;
+            width: auto;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .logo img:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .logo-text h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .college-name {
+            text-align: center;
+            margin-top: 15px;
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .college-name h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
+        /* Navigation Cards - تحسين بطاقات التنقل */
+        .nav-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-card:hover::before {
+            width: 8px;
+        }
+
+        .nav-card.active {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-card.active::before {
+            width: 10px;
+            background: var(--success-color);
+        }
+
+        .nav-card-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--gradient);
+            color: white;
+        }
+
+        .nav-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .nav-card:hover .nav-card-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-card-title {
+            flex: 1;
+        }
+
+        .nav-card-title h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .nav-card-title p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .nav-card-arrow {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .nav-card.active .nav-card-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            background: var(--gradient);
+            color: white;
+            padding: 20px 25px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .section-content {
+            background: white;
+            padding: 30px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #888;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Styles - تحسين معرض الصور */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px 15px 15px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        /* Videos Styles - تحسين الفيديوهات */
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .video-item {
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            background: white;
+        }
+
+        .video-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(233, 30, 99, 0.9);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-item:hover .video-play {
+            background-color: var(--accent-color);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Polls Styles - تحسين الاستفتاءات */
+        .poll-item {
+            background-color: var(--light-color);
+            border-radius: var(--card-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border-right: 4px solid var(--secondary-color);
+        }
+
+        .poll-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .poll-question {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .poll-options {
+            margin-bottom: 20px;
+        }
+
+        .poll-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: var(--card-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid #e0e0e0;
+        }
+
+        .poll-option:hover {
+            background-color: #f0f7ff;
+            border-color: var(--secondary-color);
+        }
+
+        .poll-option input {
+            margin-left: 10px;
+        }
+
+        .poll-option label {
+            flex: 1;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .poll-results {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .poll-result-item {
+            margin-bottom: 10px;
+        }
+
+        .poll-result-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .poll-result-fill {
+            height: 100%;
+            background: var(--secondary-color);
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        .poll-submit {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--card-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .poll-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(41, 53, 147, 0.4);
+        }
+
+        /* Schedule Styles - تحسين الجداول */
+        .schedules-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .schedule-card {
+            background: white;
+            border-radius: var(--card-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .schedule-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .schedule-card:hover .schedule-image {
+            transform: scale(1.05);
+        }
+
+        .schedule-info {
+            padding: 20px;
+        }
+
+        .schedule-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .schedule-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .schedule-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Announcements Styles - تصميم الإعلانات الجديد */
+        .announcements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .announcement-item {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-right: 4px solid var(--info-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--info-color);
+        }
+
+        .announcement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .announcement-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            flex: 1;
+        }
+
+        .announcement-date {
+            background: var(--gradient-info);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .announcement-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .announcement-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: var(--gradient);
+            color: white;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: var(--card-radius);
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--card-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(-150%);
+            transition: transform 0.4s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedules-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .announcement-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi201Tw7yUFj8r74gTtygCWXD7685LR2C8yrx3osHYPBRH_28p85yq7GS3VZUMkVVoyv7mT9NuMZDIlDAQo7XFJRjRLMl4thzdO_Gdkpkz7kS_z2kEjpURj2-QrISs6sKBpdlRCcMiuBPriE0ndYz9dw-umnYe1v7MmzJTkyoJZRxEfYkHUYd4z-KBNqWJo/s1600/21634.jpg" alt="شعار الكلية">
+                    <div class="logo-text">
+                        
+                    </div>
+                </div>
+                <div class="college-name">
+                    <h1>كلية الخدمة الاجتماعية</h1>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- Navigation Cards -->
+    <div class="container">
+        <div class="nav-cards">
+            <div class="nav-card" data-target="gallery">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="nav-card-title">
+                        <h3>معرض الصور</h3>
+                        <p>استعرض الصور والفعاليات</p>
+                    </div>
+                    <div class="nav-card-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-card" data-target="videos">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="nav-card-title">
+                        <h3>الفيديوهات</h3>
+                        <p>مقاطع فيديو تعليمية وتوثيقية</p>
+                    </div>
+                    <div class="nav-card-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-card" data-target="polls">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">
+                        <i class="fas fa-poll"></i>
+                    </div>
+                    <div class="nav-card-title">
+                        <h3>الاستفتاءات</h3>
+                        <p>شارك برأيك في استفتاءات الكلية</p>
+                    </div>
+                    <div class="nav-card-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-card" data-target="schedule">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="nav-card-title">
+                        <h3>جدول الكلية</h3>
+                        <p>الجدول الدراسي والمواعيد</p>
+                    </div>
+                    <div class="nav-card-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- إضافة قسم الإعلانات -->
+            <div class="nav-card" data-target="announcements">
+                <div class="nav-card-header">
+                    <div class="nav-card-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="nav-card-title">
+                        <h3>الإعلانات</h3>
+                        <p>آخر الأخبار والإعلانات الهامة</p>
+                    </div>
+                    <div class="nav-card-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <!-- Gallery Section -->
+        <div class="content-section" id="gallery-section">
+            <div class="section-header">
+                <h2><i class="fas fa-images"></i> معرض الصور</h2>
+                <span class="section-count" id="gallery-count">0 صور</span>
+            </div>
+            <div class="section-content">
+                <div class="gallery" id="gallery-container">
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <h3>لا توجد صور حالياً</h3>
+                        <p>لم يتم إضافة أي صور إلى المعرض بعد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div class="content-section" id="videos-section">
+            <div class="section-header">
+                <h2><i class="fas fa-video"></i> الفيديوهات</h2>
+                <span class="section-count" id="videos-count">0 فيديوهات</span>
+            </div>
+            <div class="section-content">
+                <div class="videos-container" id="videos-container">
+                    <div class="empty-state">
+                        <i class="fas fa-video"></i>
+                        <h3>لا توجد فيديوهات حالياً</h3>
+                        <p>لم يتم إضافة أي فيديوهات بعد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Polls Section -->
+        <div class="content-section" id="polls-section">
+            <div class="section-header">
+                <h2><i class="fas fa-poll"></i> الاستفتاءات</h2>
+                <span class="section-count" id="polls-count">0 استفتاءات</span>
+            </div>
+            <div class="section-content">
+                <div id="polls-container">
+                    <div class="empty-state">
+                        <i class="fas fa-poll"></i>
+                        <h3>لا توجد استفتاءات حالياً</h3>
+                        <p>لم يتم إنشاء أي استفتاءات بعد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="content-section" id="schedule-section">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar-alt"></i> جداول الكلية</h2>
+                <span class="section-count" id="schedules-count">0 جداول</span>
+            </div>
+            <div class="section-content">
+                <div class="schedules-container" id="schedules-container">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>لا توجد جداول حالياً</h3>
+                        <p>لم يتم إضافة أي جداول بعد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Section - قسم الإعلانات الجديد -->
+        <div class="content-section" id="announcements-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bullhorn"></i> الإعلانات</h2>
+                <span class="section-count" id="announcements-count">0 إعلان</span>
+            </div>
+            <div class="section-content">
+                <div class="announcements-container" id="announcements-container">
+                    <div class="empty-state">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>لا توجد إعلانات حالياً</h3>
+                        <p>لم يتم إضافة أي إعلانات بعد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">صورة المعرض</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" id="modalImage" src="" alt="صورة المعرض">
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="scheduleModalTitle">جدول الكلية</h3>
+                <button class="modal-close" id="closeScheduleModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" id="scheduleModalImage" src="" alt="جدول الكلية">
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">تمت العملية بنجاح</span>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDVm-yPDkeaY5K9lOFjTCR_PWCRZ6u9LOs",
+            authDomain: "selah-el-azhary.firebaseapp.com",
+            databaseURL: "https://selah-el-azhary-default-rtdb.firebaseio.com",
+            projectId: "selah-el-azhary",
+            storageBucket: "selah-el-azhary.firebasestorage.app",
+            messagingSenderId: "543807126731",
+            appId: "1:543807126731:web:3ecee89b9a8d1fc5e02f4e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // DOM Elements
+        const navCards = document.querySelectorAll('.nav-card');
+        const contentSections = document.querySelectorAll('.content-section');
+        const galleryContainer = document.getElementById('gallery-container');
+        const videosContainer = document.getElementById('videos-container');
+        const pollsContainer = document.getElementById('polls-container');
+        const schedulesContainer = document.getElementById('schedules-container');
+        const announcementsContainer = document.getElementById('announcements-container');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeModal = document.getElementById('closeModal');
+        const scheduleModal = document.getElementById('scheduleModal');
+        const scheduleModalImage = document.getElementById('scheduleModalImage');
+        const scheduleModalTitle = document.getElementById('scheduleModalTitle');
+        const closeScheduleModal = document.getElementById('closeScheduleModal');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        
+        // Count Elements
+        const galleryCount = document.getElementById('gallery-count');
+        const videosCount = document.getElementById('videos-count');
+        const pollsCount = document.getElementById('polls-count');
+        const schedulesCount = document.getElementById('schedules-count');
+        const announcementsCount = document.getElementById('announcements-count');
+
+        // Navigation functionality
+        navCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const target = card.getAttribute('data-target');
+                
+                // Remove active class from all cards and sections
+                navCards.forEach(c => c.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked card and corresponding section
+                card.classList.add('active');
+                document.getElementById(`${target}-section`).classList.add('active');
+                
+                // Scroll to section
+                document.getElementById(`${target}-section`).scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Show Toast Notification
+        function showToast(message, isError = false) {
+            toastMessage.textContent = message;
+            toast.classList.remove('error');
+            
+            if (isError) {
+                toast.classList.add('error');
+                toast.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else {
+                toast.querySelector('i').className = 'fas fa-check-circle';
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load Gallery Images from Firebase
+        const galleryRef = ref(database, 'gallery');
+        onValue(galleryRef, (snapshot) => {
+            const data = snapshot.val();
+            galleryContainer.innerHTML = '';
+            
+            if (data) {
+                const imageKeys = Object.keys(data);
+                galleryCount.textContent = `${imageKeys.length} صور`;
+                
+                imageKeys.forEach(key => {
+                    const image = data[key];
+                    
+                    // Add to gallery
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <img src="${image.url}" alt="${image.title}" loading="lazy">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-title">${image.title}</div>
+                        </div>
+                    `;
+                    galleryItem.addEventListener('click', () => {
+                        modalImage.src = image.url;
+                        modalTitle.textContent = image.title;
+                        imageModal.classList.add('active');
+                    });
+                    galleryContainer.appendChild(galleryItem);
+                });
+            } else {
+                galleryContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-images"></i>
+                        <h3>لا توجد صور حالياً</h3>
+                        <p>لم يتم إضافة أي صور إلى المعرض بعد.</p>
+                    </div>
+                `;
+                galleryCount.textContent = '0 صور';
+            }
+        });
+
+        // Load Videos from Firebase
+        const videosRef = ref(database, 'videos');
+        onValue(videosRef, (snapshot) => {
+            const data = snapshot.val();
+            videosContainer.innerHTML = '';
+            
+            if (data) {
+                const videoKeys = Object.keys(data);
+                videosCount.textContent = `${videoKeys.length} فيديوهات`;
+                
+                videoKeys.forEach(key => {
+                    const video = data[key];
+                    const videoId = extractYouTubeId(video.url);
+                    
+                    // Add to videos section
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'video-item';
+                    videoItem.innerHTML = `
+                        <div class="video-thumbnail">
+                            <img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="${video.title}">
+                            <div class="video-play">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h3>${video.title}</h3>
+                            <p>${video.description || ''}</p>
+                        </div>
+                    `;
+                    videoItem.addEventListener('click', () => {
+                        window.open(video.url, '_blank');
+                    });
+                    videosContainer.appendChild(videoItem);
+                });
+            } else {
+                videosContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-video"></i>
+                        <h3>لا توجد فيديوهات حالياً</h3>
+                        <p>لم يتم إضافة أي فيديوهات بعد.</p>
+                    </div>
+                `;
+                videosCount.textContent = '0 فيديوهات';
+            }
+        });
+
+        // Load Polls from Firebase
+        const pollsRef = ref(database, 'polls');
+        onValue(pollsRef, (snapshot) => {
+            const data = snapshot.val();
+            pollsContainer.innerHTML = '';
+            
+            if (data) {
+                const pollKeys = Object.keys(data);
+                pollsCount.textContent = `${pollKeys.length} استفتاءات`;
+                
+                pollKeys.forEach(key => {
+                    const poll = data[key];
+                    const totalVotes = poll.options.reduce((sum, option) => sum + (option.votes || 0), 0);
+                    
+                    const pollItem = document.createElement('div');
+                    pollItem.className = 'poll-item';
+                    
+                    let optionsHtml = '';
+                    poll.options.forEach((option, index) => {
+                        const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
+                        optionsHtml += `
+                            <div class="poll-option">
+                                <input type="radio" id="poll-${key}-${index}" name="poll-${key}" value="${index}">
+                                <label for="poll-${key}-${index}">${option.text}</label>
+                            </div>
+                            <div class="poll-results" id="results-${key}-${index}">
+                                <div class="poll-result-item">
+                                    <div>${option.text} <span>(${percentage}%)</span></div>
+                                    <div class="poll-result-bar">
+                                        <div class="poll-result-fill" style="width: ${percentage}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    pollItem.innerHTML = `
+                        <div class="poll-question">
+                            <i class="fas fa-question-circle"></i> ${poll.question}
+                        </div>
+                        <div class="poll-options">
+                            ${optionsHtml}
+                        </div>
+                        <button class="poll-submit" data-poll-id="${key}">
+                            <i class="fas fa-vote-yea"></i> تصويت
+                        </button>
+                        <div class="text-center mt-20">
+                            <small>إجمالي الأصوات: ${totalVotes}</small>
+                        </div>
+                    `;
+                    
+                    const submitBtn = pollItem.querySelector('.poll-submit');
+                    submitBtn.addEventListener('click', () => {
+                        const selectedOption = pollItem.querySelector('input[type="radio"]:checked');
+                        if (selectedOption) {
+                            const optionIndex = parseInt(selectedOption.value);
+                            voteInPoll(key, optionIndex);
+                        } else {
+                            showToast('يرجى اختيار خيار قبل التصويت', true);
+                        }
+                    });
+                    
+                    pollsContainer.appendChild(pollItem);
+                });
+            } else {
+                pollsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-poll"></i>
+                        <h3>لا توجد استفتاءات حالياً</h3>
+                        <p>لم يتم إنشاء أي استفتاءات بعد.</p>
+                    </div>
+                `;
+                pollsCount.textContent = '0 استفتاءات';
+            }
+        });
+
+        // Load Schedules from Firebase
+        const schedulesRef = ref(database, 'schedules');
+        onValue(schedulesRef, (snapshot) => {
+            const data = snapshot.val();
+            schedulesContainer.innerHTML = '';
+            
+            if (data) {
+                const scheduleKeys = Object.keys(data);
+                schedulesCount.textContent = `${scheduleKeys.length} جداول`;
+                
+                scheduleKeys.forEach(key => {
+                    const schedule = data[key];
+                    
+                    // Add to schedules section
+                    const scheduleCard = document.createElement('div');
+                    scheduleCard.className = 'schedule-card';
+                    scheduleCard.innerHTML = `
+                        <img src="${schedule.imageUrl}" alt="${schedule.title}" class="schedule-image">
+                        <div class="schedule-info">
+                            <div class="schedule-title">${schedule.title}</div>
+                            <div class="schedule-description">${schedule.description || ''}</div>
+                            <div class="schedule-meta">
+                                <span><i class="far fa-calendar"></i> ${schedule.semester}</span>
+                                <span><i class="far fa-clock"></i> ${new Date(schedule.timestamp).toLocaleDateString('ar-SA')}</span>
+                            </div>
+                        </div>
+                    `;
+                    scheduleCard.addEventListener('click', () => {
+                        scheduleModalImage.src = schedule.imageUrl;
+                        scheduleModalTitle.textContent = schedule.title;
+                        scheduleModal.classList.add('active');
+                    });
+                    schedulesContainer.appendChild(scheduleCard);
+                });
+            } else {
+                schedulesContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>لا توجد جداول حالياً</h3>
+                        <p>لم يتم إضافة أي جداول بعد.</p>
+                    </div>
+                `;
+                schedulesCount.textContent = '0 جداول';
+            }
+        });
+
+        // Load Announcements from Firebase - تحميل الإعلانات
+        const announcementsRef = ref(database, 'announcements');
+        onValue(announcementsRef, (snapshot) => {
+            const data = snapshot.val();
+            announcementsContainer.innerHTML = '';
+            
+            if (data) {
+                const announcementKeys = Object.keys(data);
+                announcementsCount.textContent = `${announcementKeys.length} إعلان`;
+                
+                announcementKeys.forEach(key => {
+                    const announcement = data[key];
+                    const announcementDate = announcement.date ? new Date(announcement.date).toLocaleDateString('ar-SA') : new Date(announcement.timestamp).toLocaleDateString('ar-SA');
+                    
+                    // Add to announcements section
+                    const announcementItem = document.createElement('div');
+                    announcementItem.className = 'announcement-item';
+                    announcementItem.innerHTML = `
+                        <div class="announcement-header">
+                            <div class="announcement-title">${announcement.title}</div>
+                            <div class="announcement-date">${announcementDate}</div>
+                        </div>
+                        <div class="announcement-content">${announcement.content}</div>
+                    `;
+                    announcementsContainer.appendChild(announcementItem);
+                });
+            } else {
+                announcementsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>لا توجد إعلانات حالياً</h3>
+                        <p>لم يتم إضافة أي إعلانات بعد.</p>
+                    </div>
+                `;
+                announcementsCount.textContent = '0 إعلان';
+            }
+        });
+
+        // Modal Functionality
+        closeModal.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        closeScheduleModal.addEventListener('click', () => {
+            scheduleModal.classList.remove('active');
+        });
+
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+            }
+        });
+
+        scheduleModal.addEventListener('click', (e) => {
+            if (e.target === scheduleModal) {
+                scheduleModal.classList.remove('active');
+            }
+        });
+
+        // Vote in Poll
+        function voteInPoll(pollId, optionIndex) {
+            const pollRef = ref(database, `polls/${pollId}/options/${optionIndex}/votes`);
+            
+            // Get current votes and increment
+            onValue(pollRef, (snapshot) => {
+                const currentVotes = snapshot.val() || 0;
+                set(pollRef, currentVotes + 1).then(() => {
+                    showToast('شكراً لك، تم تسجيل تصويتك بنجاح');
+                    
+                    // Show results after voting
+                    setTimeout(() => {
+                        document.querySelectorAll('.poll-results').forEach(el => {
+                            el.style.display = 'block';
+                        });
+                    }, 500);
+                }).catch((error) => {
+                    showToast('حدث خطأ أثناء التصويت: ' + error.message, true);
+                });
+            }, { onlyOnce: true });
+        }
+
+        // Helper function to extract YouTube ID from URL
+        function extractYouTubeId(url) {
+            const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[7].length === 11) ? match[7] : false;
+        }
+
+        // Helper function to validate YouTube URL
+        function isValidYouTubeUrl(url) {
+            const pattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+            return pattern.test(url);
+        }
+    </script>
+</body>
+</html>
