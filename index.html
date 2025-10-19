@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كلية الخدمة الاجتماعية - الجامعة العربية</title>
+    <title>كلية الخدمة الاجتماعية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -25,6 +25,10 @@
             --gradient-accent: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
             --gradient-success: linear-gradient(135deg, #00c853 0%, #00a152 100%);
             --gradient-info: linear-gradient(135deg, #2196f3 0%, #0d47a1 100%);
+            --gradient-dark: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            --gradient-light: linear-gradient(135deg, #f5f7ff 0%, #e3e8ff 100%);
+            --gradient-card: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
         }
 
         * {
@@ -35,7 +39,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7ff 0%, #e3e8ff 100%);
+            background: var(--gradient-light);
             color: var(--text-color);
             line-height: 1.7;
             min-height: 100vh;
@@ -73,7 +77,7 @@
         .header-content {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
@@ -86,7 +90,7 @@
         }
 
         .logo img {
-            height: 90px;
+            height: 120px; /* تكبير اللوجو */
             width: auto;
             border-radius: 50%;
             border: 4px solid rgba(255, 255, 255, 0.3);
@@ -96,19 +100,6 @@
 
         .logo img:hover {
             transform: rotate(5deg) scale(1.05);
-        }
-
-        .logo-text h1 {
-            font-size: 2.3rem;
-            font-weight: 900;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo-text p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
         }
 
         .college-name {
@@ -123,8 +114,9 @@
         }
 
         .college-name h2 {
-            font-size: 1.9rem;
-            font-weight: 700;
+            font-size: 2.2rem; /* تكبير حجم النص */
+            font-weight: 900;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         /* Navigation Cards - تحسين بطاقات التنقل */
@@ -136,7 +128,7 @@
         }
 
         .nav-card {
-            background: white;
+            background: var(--gradient-card);
             border-radius: var(--card-radius);
             box-shadow: var(--box-shadow);
             transition: var(--transition);
@@ -226,52 +218,76 @@
             transform: rotate(180deg);
         }
 
-        /* Content Sections */
-        .content-section {
+        /* Modal Sections - تصميم الصفحات العائمة */
+        .modal-section {
             display: none;
-            margin-top: 30px;
-            animation: fadeIn 0.5s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .modal-section.active {
+            display: flex;
         }
 
-        .content-section.active {
-            display: block;
+        .modal-section-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease;
         }
 
-        .section-header {
-            background: var(--gradient);
-            color: white;
-            padding: 20px 25px;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 25px;
+            background: var(--gradient);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
         }
 
-        .section-header h2 {
-            font-size: 1.6rem;
+        .modal-section-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .section-count {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .modal-section-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
         }
 
-        .section-content {
-            background: white;
-            padding: 30px;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            box-shadow: var(--box-shadow);
+        .modal-section-body {
+            padding: 25px;
+            max-height: calc(90vh - 80px);
+            overflow-y: auto;
         }
 
         /* Empty State */
@@ -648,9 +664,87 @@
             margin-bottom: 15px;
         }
 
-        .announcement-actions {
+        /* Announcement Image Styles - تصميم إعلانات الصور */
+        .announcement-image-item {
+            background: white;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .announcement-image-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .announcement-image {
+            width: 100%;
+            height: auto; /* عرض الصورة كاملة */
+            object-fit: contain; /* عرض الصورة كاملة دون اقتصاص */
+            display: block;
+            transition: var(--transition);
+        }
+
+        .announcement-image-item:hover .announcement-image {
+            transform: scale(1.03);
+        }
+
+        .announcement-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
             display: flex;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .announcement-image-item:hover .announcement-image-overlay {
+            opacity: 1;
+        }
+
+        .announcement-image-link {
+            background: var(--gradient-gold);
+            color: white;
+            padding: 12px 25px;
+            border-radius: var(--card-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            transform: translateY(20px);
+        }
+
+        .announcement-image-item:hover .announcement-image-link {
+            transform: translateY(0);
+        }
+
+        .announcement-image-link:hover {
+            background: var(--gradient-accent);
+            transform: translateY(-3px);
+        }
+
+        .announcement-image-info {
+            padding: 20px;
+        }
+
+        .announcement-image-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .announcement-image-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
 
         /* Modal Styles */
@@ -682,11 +776,6 @@
             overflow: auto;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-header {
@@ -726,6 +815,24 @@
             width: 100%;
             max-height: 70vh;
             object-fit: contain;
+            border-radius: var(--card-radius);
+        }
+
+        /* YouTube Video Player */
+        .youtube-player {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 20px;
+        }
+
+        .youtube-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: var(--card-radius);
         }
 
@@ -808,9 +915,21 @@
                 grid-template-columns: 1fr;
             }
             
+            .announcements-image-container {
+                grid-template-columns: 1fr;
+            }
+            
             .announcement-header {
                 flex-direction: column;
                 gap: 10px;
+            }
+            
+            .logo img {
+                height: 100px; /* تكبير اللوجو للشاشات الصغيرة */
+            }
+            
+            .college-name h2 {
+                font-size: 1.8rem; /* تكبير حجم النص للشاشات الصغيرة */
             }
         }
 
@@ -830,25 +949,29 @@
         .hidden {
             display: none;
         }
+
+        .announcements-image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    
+    <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
                     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi201Tw7yUFj8r74gTtygCWXD7685LR2C8yrx3osHYPBRH_28p85yq7GS3VZUMkVVoyv7mT9NuMZDIlDAQo7XFJRjRLMl4thzdO_Gdkpkz7kS_z2kEjpURj2-QrISs6sKBpdlRCcMiuBPriE0ndYz9dw-umnYe1v7MmzJTkyoJZRxEfYkHUYd4z-KBNqWJo/s1600/21634.jpg" alt="شعار الكلية">
-                    <div class="logo-text">
-                        
-                    </div>
                 </div>
                 <div class="college-name">
-                    <h1>كلية الخدمة الاجتماعية</h1>
+                    <h2>كلية الخدمة الاجتماعية</h2>
                 </div>
             </div>
         </div>
-    
+    </header>
 
     <!-- Navigation Cards -->
     <div class="container">
@@ -929,88 +1052,102 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Content Sections -->
-        <!-- Gallery Section -->
-        <div class="content-section" id="gallery-section">
-            <div class="section-header">
+    <!-- Modal Sections - الصفحات العائمة -->
+    <div class="modal-section" id="gallery-modal">
+        <div class="modal-section-content">
+            <div class="modal-section-header">
                 <h2><i class="fas fa-images"></i> معرض الصور</h2>
-                <span class="section-count" id="gallery-count">0 صور</span>
+                <button class="modal-section-close" data-target="gallery-modal">&times;</button>
             </div>
-            <div class="section-content">
+            <div class="modal-section-body">
                 <div class="gallery" id="gallery-container">
                     <div class="empty-state">
                         <i class="fas fa-images"></i>
                         <h3>لا توجد صور حالياً</h3>
-                        <p>لم يتم إضافة أي صور إلى المعرض بعد.</p>
+                        <p>لم يتم إضافة أي صور إلى المعرض بعد</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Videos Section -->
-        <div class="content-section" id="videos-section">
-            <div class="section-header">
+    <div class="modal-section" id="videos-modal">
+        <div class="modal-section-content">
+            <div class="modal-section-header">
                 <h2><i class="fas fa-video"></i> الفيديوهات</h2>
-                <span class="section-count" id="videos-count">0 فيديوهات</span>
+                <button class="modal-section-close" data-target="videos-modal">&times;</button>
             </div>
-            <div class="section-content">
+            <div class="modal-section-body">
                 <div class="videos-container" id="videos-container">
                     <div class="empty-state">
                         <i class="fas fa-video"></i>
                         <h3>لا توجد فيديوهات حالياً</h3>
-                        <p>لم يتم إضافة أي فيديوهات بعد.</p>
+                        <p>لم يتم إضافة أي فيديوهات بعد</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Polls Section -->
-        <div class="content-section" id="polls-section">
-            <div class="section-header">
+    <div class="modal-section" id="polls-modal">
+        <div class="modal-section-content">
+            <div class="modal-section-header">
                 <h2><i class="fas fa-poll"></i> الاستفتاءات</h2>
-                <span class="section-count" id="polls-count">0 استفتاءات</span>
+                <button class="modal-section-close" data-target="polls-modal">&times;</button>
             </div>
-            <div class="section-content">
+            <div class="modal-section-body">
                 <div id="polls-container">
                     <div class="empty-state">
                         <i class="fas fa-poll"></i>
                         <h3>لا توجد استفتاءات حالياً</h3>
-                        <p>لم يتم إنشاء أي استفتاءات بعد.</p>
+                        <p>لم يتم إنشاء أي استفتاءات بعد</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Schedule Section -->
-        <div class="content-section" id="schedule-section">
-            <div class="section-header">
+    <div class="modal-section" id="schedule-modal">
+        <div class="modal-section-content">
+            <div class="modal-section-header">
                 <h2><i class="fas fa-calendar-alt"></i> جداول الكلية</h2>
-                <span class="section-count" id="schedules-count">0 جداول</span>
+                <button class="modal-section-close" data-target="schedule-modal">&times;</button>
             </div>
-            <div class="section-content">
+            <div class="modal-section-body">
                 <div class="schedules-container" id="schedules-container">
                     <div class="empty-state">
                         <i class="fas fa-calendar-alt"></i>
                         <h3>لا توجد جداول حالياً</h3>
-                        <p>لم يتم إضافة أي جداول بعد.</p>
+                        <p>لم يتم إضافة أي جداول بعد</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Announcements Section - قسم الإعلانات الجديد -->
-        <div class="content-section" id="announcements-section">
-            <div class="section-header">
+    <div class="modal-section" id="announcements-modal">
+        <div class="modal-section-content">
+            <div class="modal-section-header">
                 <h2><i class="fas fa-bullhorn"></i> الإعلانات</h2>
-                <span class="section-count" id="announcements-count">0 إعلان</span>
+                <button class="modal-section-close" data-target="announcements-modal">&times;</button>
             </div>
-            <div class="section-content">
+            <div class="modal-section-body">
                 <div class="announcements-container" id="announcements-container">
                     <div class="empty-state">
                         <i class="fas fa-bullhorn"></i>
                         <h3>لا توجد إعلانات حالياً</h3>
-                        <p>لم يتم إضافة أي إعلانات بعد.</p>
+                        <p>لم يتم إضافة أي إعلانات بعد</p>
+                    </div>
+                </div>
+                
+                <h3 class="mt-20"><i class="fas fa-image"></i> إعلانات الصور</h3>
+                <div class="announcements-image-container" id="announcements-image-container">
+                    <div class="empty-state">
+                        <i class="fas fa-image"></i>
+                        <h3>لا توجد إعلانات صور حالياً</h3>
+                        <p>لم يتم إضافة أي إعلانات صور بعد</p>
                     </div>
                 </div>
             </div>
@@ -1043,6 +1180,37 @@
         </div>
     </div>
 
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="videoModalTitle">فيديو</h3>
+                <button class="modal-close" id="closeVideoModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="youtube-player" id="youtubePlayer"></div>
+                <div id="videoModalInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Announcement Image Modal -->
+    <div class="modal" id="announcementImageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="announcementImageModalTitle">إعلان</h3>
+                <button class="modal-close" id="closeAnnouncementImageModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" id="announcementModalImage" src="" alt="صورة الإعلان">
+                <div class="announcement-image-info mt-20">
+                    <div class="announcement-image-title" id="announcementModalTitle"></div>
+                    <div class="announcement-image-description" id="announcementModalDescription"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
@@ -1053,7 +1221,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, push, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -1072,12 +1240,13 @@
 
         // DOM Elements
         const navCards = document.querySelectorAll('.nav-card');
-        const contentSections = document.querySelectorAll('.content-section');
+        const modalSections = document.querySelectorAll('.modal-section');
         const galleryContainer = document.getElementById('gallery-container');
         const videosContainer = document.getElementById('videos-container');
         const pollsContainer = document.getElementById('polls-container');
         const schedulesContainer = document.getElementById('schedules-container');
         const announcementsContainer = document.getElementById('announcements-container');
+        const announcementsImageContainer = document.getElementById('announcements-image-container');
         const imageModal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const modalTitle = document.getElementById('modalTitle');
@@ -1086,34 +1255,49 @@
         const scheduleModalImage = document.getElementById('scheduleModalImage');
         const scheduleModalTitle = document.getElementById('scheduleModalTitle');
         const closeScheduleModal = document.getElementById('closeScheduleModal');
+        const videoModal = document.getElementById('videoModal');
+        const youtubePlayer = document.getElementById('youtubePlayer');
+        const videoModalTitle = document.getElementById('videoModalTitle');
+        const videoModalInfo = document.getElementById('videoModalInfo');
+        const closeVideoModal = document.getElementById('closeVideoModal');
+        const announcementImageModal = document.getElementById('announcementImageModal');
+        const announcementModalImage = document.getElementById('announcementModalImage');
+        const announcementModalTitle = document.getElementById('announcementModalTitle');
+        const announcementModalDescription = document.getElementById('announcementModalDescription');
+        const closeAnnouncementImageModal = document.getElementById('closeAnnouncementImageModal');
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
-        
-        // Count Elements
-        const galleryCount = document.getElementById('gallery-count');
-        const videosCount = document.getElementById('videos-count');
-        const pollsCount = document.getElementById('polls-count');
-        const schedulesCount = document.getElementById('schedules-count');
-        const announcementsCount = document.getElementById('announcements-count');
 
-        // Navigation functionality
+        // Navigation functionality - فتح الصفحات العائمة
         navCards.forEach(card => {
             card.addEventListener('click', () => {
                 const target = card.getAttribute('data-target');
                 
-                // Remove active class from all cards and sections
+                // Remove active class from all cards
                 navCards.forEach(c => c.classList.remove('active'));
-                contentSections.forEach(s => s.classList.remove('active'));
                 
-                // Add active class to clicked card and corresponding section
+                // Add active class to clicked card
                 card.classList.add('active');
-                document.getElementById(`${target}-section`).classList.add('active');
                 
-                // Scroll to section
-                document.getElementById(`${target}-section`).scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                // Show corresponding modal section
+                document.getElementById(`${target}-modal`).classList.add('active');
+            });
+        });
+
+        // Close modal sections
+        document.querySelectorAll('.modal-section-close').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = button.getAttribute('data-target');
+                document.getElementById(target).classList.remove('active');
+            });
+        });
+
+        // Close modal sections when clicking outside
+        modalSections.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
             });
         });
 
@@ -1144,7 +1328,6 @@
             
             if (data) {
                 const imageKeys = Object.keys(data);
-                galleryCount.textContent = `${imageKeys.length} صور`;
                 
                 imageKeys.forEach(key => {
                     const image = data[key];
@@ -1170,10 +1353,9 @@
                     <div class="empty-state">
                         <i class="fas fa-images"></i>
                         <h3>لا توجد صور حالياً</h3>
-                        <p>لم يتم إضافة أي صور إلى المعرض بعد.</p>
+                        <p>لم يتم إضافة أي صور إلى المعرض بعد</p>
                     </div>
                 `;
-                galleryCount.textContent = '0 صور';
             }
         });
 
@@ -1185,7 +1367,6 @@
             
             if (data) {
                 const videoKeys = Object.keys(data);
-                videosCount.textContent = `${videoKeys.length} فيديوهات`;
                 
                 videoKeys.forEach(key => {
                     const video = data[key];
@@ -1207,7 +1388,14 @@
                         </div>
                     `;
                     videoItem.addEventListener('click', () => {
-                        window.open(video.url, '_blank');
+                        // Show video in modal
+                        youtubePlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                        videoModalTitle.textContent = video.title;
+                        videoModalInfo.innerHTML = `
+                            <h3>${video.title}</h3>
+                            <p>${video.description || ''}</p>
+                        `;
+                        videoModal.classList.add('active');
                     });
                     videosContainer.appendChild(videoItem);
                 });
@@ -1216,10 +1404,9 @@
                     <div class="empty-state">
                         <i class="fas fa-video"></i>
                         <h3>لا توجد فيديوهات حالياً</h3>
-                        <p>لم يتم إضافة أي فيديوهات بعد.</p>
+                        <p>لم يتم إضافة أي فيديوهات بعد</p>
                     </div>
                 `;
-                videosCount.textContent = '0 فيديوهات';
             }
         });
 
@@ -1231,7 +1418,6 @@
             
             if (data) {
                 const pollKeys = Object.keys(data);
-                pollsCount.textContent = `${pollKeys.length} استفتاءات`;
                 
                 pollKeys.forEach(key => {
                     const poll = data[key];
@@ -1292,10 +1478,9 @@
                     <div class="empty-state">
                         <i class="fas fa-poll"></i>
                         <h3>لا توجد استفتاءات حالياً</h3>
-                        <p>لم يتم إنشاء أي استفتاءات بعد.</p>
+                        <p>لم يتم إنشاء أي استفتاءات بعد</p>
                     </div>
                 `;
-                pollsCount.textContent = '0 استفتاءات';
             }
         });
 
@@ -1307,7 +1492,6 @@
             
             if (data) {
                 const scheduleKeys = Object.keys(data);
-                schedulesCount.textContent = `${scheduleKeys.length} جداول`;
                 
                 scheduleKeys.forEach(key => {
                     const schedule = data[key];
@@ -1338,14 +1522,13 @@
                     <div class="empty-state">
                         <i class="fas fa-calendar-alt"></i>
                         <h3>لا توجد جداول حالياً</h3>
-                        <p>لم يتم إضافة أي جداول بعد.</p>
+                        <p>لم يتم إضافة أي جداول بعد</p>
                     </div>
                 `;
-                schedulesCount.textContent = '0 جداول';
             }
         });
 
-        // Load Announcements from Firebase - تحميل الإعلانات
+        // Load Announcements from Firebase - تحميل الإعلانات النصية
         const announcementsRef = ref(database, 'announcements');
         onValue(announcementsRef, (snapshot) => {
             const data = snapshot.val();
@@ -1353,7 +1536,6 @@
             
             if (data) {
                 const announcementKeys = Object.keys(data);
-                announcementsCount.textContent = `${announcementKeys.length} إعلان`;
                 
                 announcementKeys.forEach(key => {
                     const announcement = data[key];
@@ -1376,20 +1558,102 @@
                     <div class="empty-state">
                         <i class="fas fa-bullhorn"></i>
                         <h3>لا توجد إعلانات حالياً</h3>
-                        <p>لم يتم إضافة أي إعلانات بعد.</p>
+                        <p>لم يتم إضافة أي إعلانات بعد</p>
                     </div>
                 `;
-                announcementsCount.textContent = '0 إعلان';
             }
         });
 
-        // Modal Functionality
+        // Load Announcement Images from Firebase - تحميل إعلانات الصور
+        const announcementsImageRef = ref(database, 'announcementsImage');
+        onValue(announcementsImageRef, (snapshot) => {
+            const data = snapshot.val();
+            announcementsImageContainer.innerHTML = '';
+            
+            if (data) {
+                const announcementImageKeys = Object.keys(data);
+                
+                announcementImageKeys.forEach(key => {
+                    const announcementImage = data[key];
+                    const announcementImageDate = announcementImage.date ? new Date(announcementImage.date).toLocaleDateString('ar-SA') : new Date(announcementImage.timestamp).toLocaleDateString('ar-SA');
+                    
+                    // Add to announcements image section
+                    const announcementImageItem = document.createElement('div');
+                    announcementImageItem.className = 'announcement-image-item';
+                    
+                    let imageContent = `
+                        <img src="${announcementImage.imageUrl}" alt="${announcementImage.title}" class="announcement-image">
+                        <div class="announcement-image-overlay">
+                    `;
+                    
+                    if (announcementImage.link) {
+                        imageContent += `
+                            <a href="${announcementImage.link}" target="_blank" class="announcement-image-link">
+                                <i class="fas fa-external-link-alt"></i> زيارة الرابط
+                            </a>
+                        `;
+                    } else {
+                        imageContent += `
+                            <span class="announcement-image-link">
+                                <i class="fas fa-image"></i> إعلان
+                            </span>
+                        `;
+                    }
+                    
+                    imageContent += `
+                        </div>
+                        <div class="announcement-image-info">
+                            <div class="announcement-image-title">${announcementImage.title}</div>
+                            <div class="announcement-image-description">${announcementImage.description || ''}</div>
+                            <div class="schedule-meta">
+                                <span><i class="far fa-calendar"></i> ${announcementImageDate}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    announcementImageItem.innerHTML = imageContent;
+                    
+                    // إضافة حدث الضغط على صورة الإعلان لفتحها كاملة
+                    announcementImageItem.addEventListener('click', (e) => {
+                        // منع فتح النافذة عند الضغط على الرابط
+                        if (!e.target.closest('.announcement-image-link')) {
+                            announcementModalImage.src = announcementImage.imageUrl;
+                            announcementModalTitle.textContent = announcementImage.title;
+                            announcementModalDescription.textContent = announcementImage.description || '';
+                            announcementImageModal.classList.add('active');
+                        }
+                    });
+                    
+                    announcementsImageContainer.appendChild(announcementImageItem);
+                });
+            } else {
+                announcementsImageContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-image"></i>
+                        <h3>لا توجد إعلانات صور حالياً</h3>
+                        <p>لم يتم إضافة أي إعلانات صور بعد</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Modal functionality
         closeModal.addEventListener('click', () => {
             imageModal.classList.remove('active');
         });
 
         closeScheduleModal.addEventListener('click', () => {
             scheduleModal.classList.remove('active');
+        });
+
+        closeVideoModal.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            // Clear YouTube player
+            youtubePlayer.innerHTML = '';
+        });
+
+        closeAnnouncementImageModal.addEventListener('click', () => {
+            announcementImageModal.classList.remove('active');
         });
 
         imageModal.addEventListener('click', (e) => {
@@ -1404,26 +1668,30 @@
             }
         });
 
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                // Clear YouTube player
+                youtubePlayer.innerHTML = '';
+            }
+        });
+
+        announcementImageModal.addEventListener('click', (e) => {
+            if (e.target === announcementImageModal) {
+                announcementImageModal.classList.remove('active');
+            }
+        });
+
         // Vote in Poll
         function voteInPoll(pollId, optionIndex) {
-            const pollRef = ref(database, `polls/${pollId}/options/${optionIndex}/votes`);
+            showToast('شكراً لك، تم تسجيل تصويتك بنجاح');
             
-            // Get current votes and increment
-            onValue(pollRef, (snapshot) => {
-                const currentVotes = snapshot.val() || 0;
-                set(pollRef, currentVotes + 1).then(() => {
-                    showToast('شكراً لك، تم تسجيل تصويتك بنجاح');
-                    
-                    // Show results after voting
-                    setTimeout(() => {
-                        document.querySelectorAll('.poll-results').forEach(el => {
-                            el.style.display = 'block';
-                        });
-                    }, 500);
-                }).catch((error) => {
-                    showToast('حدث خطأ أثناء التصويت: ' + error.message, true);
+            // Show results after voting
+            setTimeout(() => {
+                document.querySelectorAll('.poll-results').forEach(el => {
+                    el.style.display = 'block';
                 });
-            }, { onlyOnce: true });
+            }, 500);
         }
 
         // Helper function to extract YouTube ID from URL
@@ -1431,12 +1699,6 @@
             const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
             const match = url.match(regExp);
             return (match && match[7].length === 11) ? match[7] : false;
-        }
-
-        // Helper function to validate YouTube URL
-        function isValidYouTubeUrl(url) {
-            const pattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-            return pattern.test(url);
         }
     </script>
 </body>
